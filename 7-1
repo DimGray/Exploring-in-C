@@ -1,3 +1,7 @@
+编写一个程序，根据它自身被调用时存放在argv[0]中的名字，
+实现将大写字母转换为小写字母或将小写字母转换为大写字母
+的功能。
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctype.h>
