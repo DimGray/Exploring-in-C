@@ -1,13 +1,40 @@
 # Exploring-in-C
 Knowledge discovery in K&amp;R C
 
+第7章 输入与输出
+   
+    7.3 变长参数表
+    
+        这一节简单介绍了printf函数，下面来看一下printf函数在标准库中的实现：
+        
+        static void *prout(void *str, const char *buf, size_t n)
+        {
+            return fwrite(buf, 1, n, str) == n ? str : NULL;
+        }
+        int printf(const char *fmt, ...)
+        {
+            int ans;
+            va_list ap;
+            
+            va_start(ap, fmt);
+            ans = _Printf(&prout, stdout, fmt, ap);
+            va_end(ap);
+            return ans;
+        }
+        这个函数用到了很多<stdarg.h>头文件中的内容：
+        va_list  一个指针 typedef char * va_list
+        va_start 让ap指向fmt
+        va_end   让ap置为NULL #define va_end(ap) (void)0  
+      
+   
+      
 第8章 UNIX系统接口
    
     8.2 低级I/O————read和write
         
         在这一节中说明了如何用read和write构造getchar函数，而下面让我们看一下getchar函数在C标准库中是怎样实现的：
         
-        int getchar（void）
+        int getchar(void）
         {
             return fgetc(stdin);
         }
@@ -15,7 +42,7 @@ Knowledge discovery in K&amp;R C
         在标准库中，getchar的实现只有一句，调用了一个fgetc函数，参数是标准输入流stdin.
         下面再让我们看一下fgetc这个函数究竟是怎样的：
         
-        int fgetc (FILE *str)
+        int fgetc(FILE *str)
         {
             if (0 < str->_Nback）
             {
