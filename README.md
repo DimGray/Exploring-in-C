@@ -24,9 +24,26 @@ Knowledge discovery in K&amp;R C
         这个函数用到了很多<stdarg.h>头文件中的内容：
         va_list  一个指针 typedef char * va_list
         va_start 让ap指向fmt
-        va_end   让ap置为NULL #define va_end(ap) (void)0  
-      
-   
+        va_end   让ap置为NULL #define va_end(ap) (void)0
+        所以重点在于_Printf:
+        #define MAX_PAD sizeof(spaces) - 1
+        #define PAD(s, n) if(0 < (n)) {int i, j = (n);\
+                                       for(; 0 < j; j -= i)\
+                                       {i = MAX_PAD < j ? MAX_PAD : j;\
+                                       PUT(s, i);}}
+        #define PUT(s, n) if(0 < (n)) {if((arg = (*pfn)(arg, s, n)) != NULL)\
+                                            x.nchar += (n);\
+                                       else return EOF;}
+        static char spaces[] = "                                "
+        static char spaces[] = "00000000000000000000000000000000" // 32个0
+        int _Printf(void *(*pfn)(void *, const char *, size_t), void *arg, const char *fmt, va_list ap)
+        {
+            _Pft x;
+            for(x.nchar = 0; ; )
+            {
+               
+            }
+        }
       
 第8章 UNIX系统接口
    
