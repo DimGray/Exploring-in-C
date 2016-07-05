@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+
+int main(int argc, char *argv[])
+{
+    int c;
+
+    if(!strcmp("lower", argv[0]))
+    {
+        while((c = getchar()) != EOF)
+        {
+            putchar(tolower(c));
+        }
+    }
+    else
+    {
+        while((c = getchar()) != EOF)
+        {
+            putchar(toupper(c));
+        }
+    }
+}
